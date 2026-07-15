@@ -5,10 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-
-@SpringBootApplication(scanBasePackages = {"com.example.starter", "com.example.entities"})
+@SpringBootApplication(scanBasePackages = "com.example")
+@EnableJpaRepositories(basePackages = "com.example.repository")
 @EntityScan(basePackages = "com.example.entities")
-@EnableJpaRepositories(basePackages = "com.example.starter") 
 public class MediTrackApplication {
 
 	public static void main(String[] args) {

@@ -12,10 +12,6 @@ import com.example.entities.MediTrackEntities;
 import com.example.repository.MediTrackRepository;
 import com.example.shared.MediTrackShared;
 
-
-
-
-
 @Service
 public class MediTrackService implements MediTrackShared{
 
