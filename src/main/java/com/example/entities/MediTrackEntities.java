@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "MediTrack")
+@Table(name = "meditrack")
 @Getter
 @Setter
 
