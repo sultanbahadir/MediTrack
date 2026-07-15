@@ -2,14 +2,16 @@ package com.example.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.Repository.MediTrackRepository;
 import com.example.dto.MediTrackDto;
 import com.example.entities.MediTrackEntities;
+import com.example.repository.MediTrackRepository;
 import com.example.shared.MediTrackShared;
+
 
 
 
@@ -22,9 +24,29 @@ public class MediTrackService implements MediTrackShared{
 	
 	@Override
 	public MediTrackDto saveOrUpdate(MediTrackDto dto) {
-		
-		return null;
-	}
+		 MediTrackEntities entities;
+
+		    if (dto.getId() != null) {
+		    	entities = repo.findById(dto.getId()).orElse(new MediTrackEntities());
+		    } else {
+		    	entities = new MediTrackEntities();
+		    }
+
+		    entities.setName(dto.getName());
+		    entities.setCode(dto.getCode());
+		    entities.setCategory(dto.getCategory());
+		    entities.setCompany(dto.getCompany());
+		    entities.setStockQuantity(dto.getStockQuantity());
+		    entities.setPrice(dto.getPrice());
+		    entities.setExpirationDate(dto.getExpirationDate());
+		    entities.setDescription(dto.getDescription());
+		    entities.setStatus("1");
+
+		    MediTrackEntities savedDrug = repo.save(entities);
+
+		    return convertEntityToDTO(savedDrug);
+			}
+	
 
 	private MediTrackDto convertEntityToDTO(MediTrackEntities entity) {
 		MediTrackDto dto = new MediTrackDto();
@@ -57,7 +79,7 @@ public class MediTrackService implements MediTrackShared{
 	@Override
 	public void deleteMediTrack(Long id) {
 		MediTrackEntities meditrack = repo.findById(id)
-	                .orElseThrow(() -> new RuntimeException("kayıt bulunamadı!"));
+	                .orElseThrow(() -> new NoSuchElementException("Kayıt Bulunamadı!"));
 		meditrack.setStatus("0"); 
 	        repo.save(meditrack);
 	}
