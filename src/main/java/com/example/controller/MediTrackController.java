@@ -10,7 +10,7 @@ import com.example.dto.MediTrackDto;
 
 @RestController
 @RequestMapping("/rest/api/mediTrack")
-@CrossOrigin(origins = "http://localhost:4200") // CORS iznini buraya ekledik!
+@CrossOrigin(origins = "http://localhost:4200") 
 public class MediTrackController {
 
     private final MediTrackService mediTrackService;
