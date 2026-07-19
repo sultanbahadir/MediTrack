@@ -10,6 +10,7 @@ import com.example.dto.MediTrackDto;
 
 @RestController
 @RequestMapping("/rest/api/mediTrack")
+@CrossOrigin(origins = "http://localhost:4200") 
 public class MediTrackController {
 
     private final MediTrackService mediTrackService;
@@ -30,7 +31,8 @@ public class MediTrackController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public void deleteDrug(@PathVariable Long id) {
+	public org.springframework.http.ResponseEntity<Void> deleteDrug(@PathVariable Long id) {
 		mediTrackService.deleteMediTrack(id);
+		return org.springframework.http.ResponseEntity.ok().build();
 	}
 }
